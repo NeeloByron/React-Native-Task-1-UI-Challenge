@@ -1,10 +1,14 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import ChatHeader from "@/components/ChatHeader";
 
 export default function Index() {
   return (
-    <View className="flex-1 items-center justify-center bg-white">
-      <Text className="text-xl font-bold text-blue-500"> React Native UI Challenge </Text>
-    </View>
+        <SafeAreaView className="flex-1 bg-white">
+          <View className="flex-1">
+            <ChatHeader />
+          </View>
+       </SafeAreaView>
   );
 }
 
