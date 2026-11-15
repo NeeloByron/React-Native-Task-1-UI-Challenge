@@ -9,13 +9,13 @@ export default function ChatTabs() {
 
   return (
     // container that puts the tab next to each other
-    <View className="mx-5 my-4 flex-row rounded-2xl bg-orange-50 p-1">
+    <View className="mx-5 my-4 flex-row rounded-2xl p-1" style={{ backgroundColor: "#FDECE5" }}>
      {/* makes one button for each name in the tab list. */}
       {tabs.map((tab) => {
         const isActive = activeTab === tab;
 
         return (
-           <Pressable
+           <Pressable 
                      key={tab} // gives each button its own name tag.
                      onPress={() => setActiveTab(tab)} // when pressed, remembers this tab
                      accessibilityRole="tab"

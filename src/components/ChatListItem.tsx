@@ -33,7 +33,7 @@ export default function ChatListItem({ chat }: Props) {
   const backgroundColor = avatarColors[(Number(chat.id) - 1) % avatarColors.length];
 
   return (
-    <View className="flex-row items-center px-5 py-3">
+    <View className="flex-row items-center px-5">
        <View
              style={{
              width: 64,
@@ -54,14 +54,14 @@ export default function ChatListItem({ chat }: Props) {
      )}
    </View>
 
-      <View className="ml-3 flex-1 border-b border-gray-100 pb-4">
+      <View className="ml-3 min-h-[84px] flex-1 justify-center border-b border-gray-100 py-4">
         <View className="flex-row items-center justify-between">
           <Text numberOfLines={1} className="mr-2 flex-1 text-base font-semibold text-gray-900">{chat.name}</Text>
           <Text className="text-xs text-gray-800">{chat.time}</Text>
         </View>
 
         <View className="mt-2 flex-row items-center">
-          <Text numberOfLines={1} className={`mr-3 flex-1 text-sm ${ chat.isTyping ? "font-semibold text-orange-600" : "text-gray-600"}`}>
+          <Text numberOfLines={1} className={`mr-3 flex-1 text-[13px] ${ chat.isTyping ? "font-semibold text-orange-600" : "text-gray-600"}`}>
             {chat.isTyping ? ( "Typing..." ) : (
               <>
                  {chat.sender && (
