@@ -73,11 +73,9 @@ export default function Index() {
   return (
     // makes the screen fill the available space and give it a white background
     <SafeAreaView className="flex-1 bg-white">
-      <View className="flex-1">
-        <ChatHeader /> {/* Shows the header */}
-        <ChatTabs /> {/* Shows the chat tabs below the header. */}
-
-        {/* Shows each chat in a scrollable list. */}
+      <View className="flex-1">  
+        <ChatHeader />
+        <ChatTabs />
         <FlatList
                   data={chats}
                   keyExtractor={(item) => item.id}

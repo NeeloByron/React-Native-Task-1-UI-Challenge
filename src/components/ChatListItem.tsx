@@ -17,10 +17,23 @@ type Props = {
   chat: Chat;
 };
 
+const avatarColors = [
+  "#BFE3ED",
+  "#B9DFF5",
+  "#D9CEF0",
+  "#F3C5D1",
+  "#F5D59F",
+  "#BFE3ED",
+  "#C8E8C5",
+  "#F5E2A2",
+];
+
 export default function ChatListItem({ chat }: Props) {
+  const backgroundColor = avatarColors[(Number(chat.id) - 1) % avatarColors.length];
+
   return (
     <View className="flex-row items-center px-5 py-3">
-      <View className="h-16 w-16 items-center justify-center rounded-full bg-orange-100">
+      <View className="h-16 w-16 items-center justify-center rounded-full" style={{ backgroundColor }}>
         <Text className="text-xl font-bold text-orange-700">{chat.name.charAt(0)}</Text>
       </View>
 
