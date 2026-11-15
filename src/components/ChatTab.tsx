@@ -20,7 +20,16 @@ export default function ChatTabs() {
                      onPress={() => setActiveTab(tab)} // when pressed, remembers this tab
                      accessibilityRole="tab"
                      accessibilityState={{ selected: isActive }}
-                     className={`flex-1 items-center rounded-xl py-3 ${ isActive ? "bg-orange-500" : "bg-transparent"}`}>
+                         className={`flex-1 items-center rounded-xl py-3 ${ isActive ? "bg-orange-500" : "bg-transparent"}`}
+                         style={
+                              isActive ? {
+                                           shadowColor: "#f97316",
+                                           shadowOffset: { width: 0, height: 4 },
+                                           shadowOpacity: 0.3,
+                                           shadowRadius: 8,
+                                           elevation: 5,
+                                          }
+                              : undefined }>
              {/* the selected tab gets white text; others get orange text. */}
              <Text className={`text-base font-semibold ${ isActive ? "text-white" : "text-orange-700" }`} > {tab} </Text>
          </Pressable>

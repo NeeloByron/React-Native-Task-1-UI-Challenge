@@ -1,4 +1,4 @@
-import { Text, View } from "react-native";
+import { Image, Text, View } from "react-native";
 import type { ImageSourcePropType } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -11,6 +11,7 @@ export type Chat = {
   unreadCount?: number;
   isTyping?: boolean;
   isRead?: boolean;
+  sender?: string;
 };
 
 type Props = {
@@ -33,9 +34,25 @@ export default function ChatListItem({ chat }: Props) {
 
   return (
     <View className="flex-row items-center px-5 py-3">
-      <View className="h-16 w-16 items-center justify-center rounded-full" style={{ backgroundColor }}>
-        <Text className="text-xl font-bold text-orange-700">{chat.name.charAt(0)}</Text>
-      </View>
+       <View
+             style={{
+             width: 64,
+             height: 64,
+             borderRadius: 32,
+             backgroundColor,
+             overflow: "hidden",
+             alignItems: "center",
+             justifyContent: "center",}}>
+        {chat.avatar ? (
+              <Image
+                    source={chat.avatar}
+                    style={{ width: 64, height: 64 }}
+                    resizeMode="contain"
+                    accessibilityLabel={`${chat.name}'s avatar`} />
+         ) : (
+      <Text className="text-xl font-bold text-gray-700">{chat.name.charAt(0)}</Text>
+     )}
+   </View>
 
       <View className="ml-3 flex-1 border-b border-gray-100 pb-4">
         <View className="flex-row items-center justify-between">
@@ -45,7 +62,13 @@ export default function ChatListItem({ chat }: Props) {
 
         <View className="mt-2 flex-row items-center">
           <Text numberOfLines={1} className={`mr-3 flex-1 text-sm ${ chat.isTyping ? "font-semibold text-orange-600" : "text-gray-600"}`}>
-            {chat.isTyping ? "Typing..." : chat.message}
+            {chat.isTyping ? ( "Typing..." ) : (
+              <>
+                 {chat.sender && (
+                 <Text className="font-semibold text-orange-600"> {chat.sender}{"  "} </Text>
+                  )} {chat.message}
+              </>
+             )}
           </Text>
 
           {(chat.unreadCount ?? 0) > 0 ? (
