@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { View, FlatList } from "react-native"; 
 import { SafeAreaView } from "react-native-safe-area-context"; // keeps the screen's content away from things like the phone's notch.
 import ChatHeader from "@/components/ChatHeader";
@@ -78,14 +79,20 @@ const chats: Chat[] = [
 
 // builds the screen.
 export default function Index() {
+  const [searchQuery, setSearchQuery] = useState("");
+
+// Match names regardless of capital letters or surrounding spaces.
+const filteredChats = chats.filter((chat) =>
+  chat.name.toLowerCase().includes(searchQuery.trim().toLowerCase())
+);
   return (
     // makes the screen fill the available space and give it a white background
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1">  
-        <ChatHeader />
+        <ChatHeader searchQuery={searchQuery} onSearchChange={setSearchQuery} />
         <ChatTabs />
         <FlatList
-                  data={chats}
+                  data={filteredChats}
                   keyExtractor={(item) => item.id}
                   renderItem={({ item }) => <ChatListItem chat={item} />}
                   contentContainerStyle={{ paddingBottom: 100 }} />

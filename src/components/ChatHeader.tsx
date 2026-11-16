@@ -2,9 +2,16 @@ import { useState } from "react";
 import { View, Text, Pressable, TextInput } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function ChatHeader() {
+type Props = {
+  searchQuery: string;
+  onSearchChange: (value: string) => void;
+};
+
+export default function ChatHeader({
+  searchQuery,
+  onSearchChange,
+}: Props) {
   const [searchOpen, setSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <View className="flex-row items-center justify-between px-5 py-5">
@@ -12,7 +19,7 @@ export default function ChatHeader() {
         <TextInput
                   autoFocus
                   value={searchQuery}
-                  onChangeText={setSearchQuery}
+                  onChangeText={onSearchChange}
                   placeholder="Search chats..."
                   placeholderTextColor="#6b7280"
                   accessibilityLabel="Search chats"
@@ -27,7 +34,7 @@ export default function ChatHeader() {
                     hitSlop={10}
                     onPress={() => {
                                      setSearchOpen(!searchOpen);
-                                     setSearchQuery("");}}>
+                                     onSearchChange("");}}>
           <Ionicons
                     name={searchOpen ? "close" : "search-outline"}
                     size={28}
