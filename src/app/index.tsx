@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { View, FlatList } from "react-native"; 
+import { View, FlatList, Text } from "react-native"; 
 import { SafeAreaView } from "react-native-safe-area-context"; // keeps the screen's content away from things like the phone's notch.
 import ChatHeader from "@/components/ChatHeader";
 import ChatTabs from "@/components/ChatTab";
@@ -80,24 +80,37 @@ const chats: Chat[] = [
 // builds the screen.
 export default function Index() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [unreadOnly, setUnreadOnly] = useState(false);
 
 // Match names regardless of capital letters or surrounding spaces.
-const filteredChats = chats.filter((chat) =>
-  chat.name.toLowerCase().includes(searchQuery.trim().toLowerCase())
-);
+const filteredChats = chats.filter((chat) => {
+  const matchesSearch = chat.name.toLowerCase().includes(searchQuery.trim().toLowerCase());
+  const matchesFilter = !unreadOnly || (chat.unreadCount ?? 0) > 0;
+
+  return matchesSearch && matchesFilter;
+});
   return (
     // makes the screen fill the available space and give it a white background
     <SafeAreaView className="flex-1 bg-white">
       <View className="flex-1">  
-        <ChatHeader searchQuery={searchQuery} onSearchChange={setSearchQuery} />
+        <ChatHeader searchQuery={searchQuery} onSearchChange={setSearchQuery} unreadOnly={unreadOnly} onUnreadOnlyChange={setUnreadOnly} />
         <ChatTabs />
         <FlatList
-                  data={filteredChats}
-                  keyExtractor={(item) => item.id}
-                  renderItem={({ item }) => <ChatListItem chat={item} />}
-                  contentContainerStyle={{ paddingBottom: 100 }} />
-        <NewChatButton />
+                 data={filteredChats}
+                 keyExtractor={(item) => item.id}
+                 renderItem={({ item }) => <ChatListItem chat={item} />}
+                 contentContainerStyle={{ paddingBottom: 100 }}
+                 ListEmptyComponent={
+         <View className="items-center px-5 py-12">
+           <Text className="text-lg font-semibold text-gray-900"> No chats found </Text>
+           <Text className="mt-2 text-center text-sm text-gray-500"> Try another name or select All chats from the menu. </Text>
+         </View> } />
+        <NewChatButton
+                       contacts={chats}
+                       onSelectContact={(name) => {
+                       setUnreadOnly(false);
+                       setSearchQuery(name); }} />
       </View>
-    </SafeAreaView>
+   </SafeAreaView>
   );
 }
