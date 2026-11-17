@@ -2,6 +2,17 @@
 
 A chat interface built with Expo, React Native, TypeScript, and NativeWind. This project recreates a supplied design reference using reusable components and local sample data.
 
+## Screenshot 
+<p align="center">
+  <img src="./reactNativeUiChallenge.png" alt="HALODEK chat interface preview" width="700">
+</p>
+
+## Download Android APK
+
+[Download HALODEK APK from Google Drive](https://drive.google.com/drive/folders/1PyOsSDSe7o9vQX71Hh_g7LZdbWELUQ-K?usp=drive_link)
+
+Open the folder, download the APK, and install it on your Android device.
+
 ## Features
 
 - Custom header with search and menu icons
@@ -12,7 +23,7 @@ A chat interface built with Expo, React Native, TypeScript, and NativeWind. This
 - Unread message badges and read indicators
 - Floating new-chat button
 
-Search filters the sample chat list. Tabs update their selected appearance. The menu and new-chat button are currently visual controls.
+Search filters chats by name. The menu switches between all and unread chats, avatars open larger previews, and the plus button opens a contact picker. Tabs update their selected appearance.
 
 ## Tech Stack
 
@@ -78,3 +89,4 @@ This is a frontend UI challenge. Chat data is stored locally, and no backend, au
 - Managing state with React hooks
 - Rendering lists with FlatList
 - Filtering data with a search input
+
