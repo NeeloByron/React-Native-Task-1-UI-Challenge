@@ -4,7 +4,7 @@ A chat interface built with Expo, React Native, TypeScript, and NativeWind. This
 
 ## Screenshot 
 <p align="center">
-  <img src="./reactNativeUiChallenge.png" alt="HALODEK chat interface preview" width="700">
+  <img src="./assets/images/reactNativeUiChallenge.png" alt="HALODEK chat interface preview" width="700">
 </p>
 
 ## Download Android APK
